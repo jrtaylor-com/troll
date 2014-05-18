@@ -1,9 +1,24 @@
 <?php
 
 class View {
+	/*************************
+	 * Default base template
+	 ************************/
 	private $layout = 'default';
+	
+	/*************************
+	 * Assigned vars
+	 ************************/
 	protected static $vars;
+	
+	/*************************
+	 * View file
+	 ************************/
 	private $template;
+	
+	/*************************
+	 * View content
+	 ************************/
 	private $content;
 	
 	public function __construct() {
@@ -21,9 +36,24 @@ class View {
 		}
 	}
 	
+	/*************************
+	 * Add key value pair to class var
+	 * 
+	 * @param string $key
+	 * @param string $value
+	 * @return void
+	 ************************/
 	public static function assign($key, & $value) {
 		self::$vars[$key] = & $value;
 	}
+	
+	/*************************
+	 * Get view's parsed content and load into class $content var to be passed to base template
+	 * 
+	 * @param string $view - Name of view file without extension
+	 * @param array $data
+	 * @return void/string
+	 ************************/
 	public static function render($view, $data = NULL) {
 		try {
 			// Extract vars
@@ -48,6 +78,11 @@ class View {
 		}
 	}
 	
+	/*************************
+	 * When no more calls to class exists render the template with content
+	 * 
+	 * @return string
+	 ************************/
 	public function __destruct() {
 		if (is_array(View::$vars)) {
 			extract(View::$vars);

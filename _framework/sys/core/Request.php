@@ -1,6 +1,13 @@
 <?php
 
 class Request {
+	/*************************
+	 * Send request to ORK service or return a cached value
+	 * 
+	 * @param string $class - Simplified name of class used on ORK service, see config for names
+	 * @param string $params - Parameters required by ORK request, either empty or with value but all are required for ORK response
+	 * @return array
+	 ************************/
 	public function get($class, $params = array()) {
 		// Config settings
 		include(APPPATH . 'config/config.php');

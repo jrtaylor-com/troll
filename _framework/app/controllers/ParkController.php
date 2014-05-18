@@ -1,15 +1,17 @@
 <?php
 
 class ParkController extends BaseController {
-	public function index() {
-		$kingdoms = Request::get('getKingdomsList');
-		
-		include(APPPATH . 'app\\views\\kingdom_list.php');
-	}
-	
+	/*************************
+	 * Display park info
+	 * 
+	 * @params $array $params
+	 * @return string
+	 ************************/
 	public function info($params) {
+		// Get park info
 		$info = Request::get('getParkDetails', array('ParkId' => $params[0]));
 		
+		// Required vars for roster request
 		$required_roster_vars = array(
 			'Id'                        => $params[0],
 			'Type'                      => 'Park',
@@ -22,8 +24,11 @@ class ParkController extends BaseController {
 			'DuesPaid'                  => '',
 			'Token'                     => ''
 		);
+		
+		// Get park roster
 		$roster = Request::get('getParkRoster', $required_roster_vars);
 		
+		// Page setup
 		$this->pageSetup('park_info', 'Park Information', array(
 			'roster'   => $roster,
 			'base_url' => Config::get('site.base_url')

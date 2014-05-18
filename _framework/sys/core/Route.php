@@ -2,16 +2,31 @@
 
 
 class Route {
+	/*************************
+	 * URI used to determine routing
+	 ************************/
 	public static $current_uri;
 	
+	/*************************
+	 * Current controller
+	 ************************/
 	public static $controller;
 	
+	/*************************
+	 * Method being called
+	 ************************/
 	public static $method;
 	
+	/*************************
+	 * All URI parameters sent after controller and method
+	 ************************/
 	public static $params = array();
 	
-	public static $config;
-	
+	/*************************
+	 * Setup routing values
+	 * 
+	 * @return void
+	 ************************/
 	public function get() {
 		// Set the uri
 		self::$current_uri = rtrim(ltrim(str_replace(INSTALLEDIN, '', $_SERVER['REQUEST_URI']), "/ \t\n\r"), "/ \t\n\r");
@@ -30,6 +45,7 @@ class Route {
 			self::$method = $route_parts[1];
 		} else {
 			// Default to index if there is none
+			// TODO: We didn't really use an index method in every controller so maybe something else?
 			self::$method = 'index';
 		}
 		
@@ -43,12 +59,16 @@ class Route {
 		}
 	}
 	
+	/*************************
+	 * Load routing and set current URI
+	 * 
+	 * @return string
+	 ************************/
 	public function run() {
 		// Load everything
 		self::get();
 		
-		// Set routing config
-		self::$config = '';
+		// Return current URI without installed directory in string
 		return self::$current_uri = rtrim(ltrim(str_replace(INSTALLEDIN, '', $_SERVER['REQUEST_URI']), "/ \t\n\r"), "/ \t\n\r");
 	}
 }

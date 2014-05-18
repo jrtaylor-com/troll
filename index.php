@@ -1,24 +1,14 @@
 <?php 
-/*
-// Define our base variables
-$application = '_framework/app';
-$plugins     = '_framework/plugins';
-$system      = '_framework/sys';
-
 // Check PHP version
-version_compare(PHP_VERSION, '5.2', '<') and exit('Mouse CMS requires PHP 5.2 or newer.');
+version_compare(PHP_VERSION, '5.2', '<') and exit('TROLL requires PHP 5.2 or newer.');
 
 // Error reporting
 error_reporting(E_ALL & ~E_NOTICE);
 
-define('APPPATH', str_replace('\\', '/', realpath($application)).'/');
-define('PLUGPATH', str_replace('\\', '/', realpath($plugins)).'/');
-define('SYSPATH', str_replace('\\', '/', realpath($system)).'/');
-
-// Initialize.
-require SYSPATH.'bootstrap.php';
-*/
-
+// Define our base variables
+// TODO update paths throughout
+// $application = '_framework/app';
+// $system      = '_framework/sys';
 
 // TODO replace all window \\ with something that is cross platform
 define('APPPATH', dirname(__FILE__) . '/_framework/');
@@ -36,9 +26,13 @@ include('./_framework/sys/core/View.php');
 include('./_framework/sys/core/Util.php');
 //include('testing.php');
 
+// TODO setup a method in Route that will convert hyphened names to camelcase
 Route::run();
 
-// TODO setup a method in Route that will convert hyphened names to camelcase
+// Initialize.
+//require SYSPATH.'bootstrap.php';
+
+// TODO move this stuff below into bootstrap
 if (!empty(Route::$controller) and file_exists(APPPATH . 'app/controllers/' . ucfirst(Route::$controller) . 'Controller.php')) {
 	// Load base controller
 	include(APPPATH . 'app/controllers/BaseController.php');

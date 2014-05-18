@@ -4,6 +4,6 @@
 
 abstract class Troll_Core {
 
-	const VERSION  = '2.4';
+	const VERSION  = '3.0';
 	
 }

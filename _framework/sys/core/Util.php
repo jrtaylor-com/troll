@@ -1,6 +1,12 @@
 <?php
 
 class Util {
+	/*************************
+	 * Get the display name of a kingdom prefering cached value
+	 * 
+	 * @param int $id
+	 * @return string
+	 ************************/
 	public function getKingdomNameById($id) {
 		// Check cache
 		if ($cached = Cache::get('KingdomNameList')) {
@@ -24,8 +30,17 @@ class Util {
 		return (!empty($list[$id])) ? $list[$id] : '';
 	}
 	
+	/*************************
+	 * Return ord obfuscated string
+	 * 
+	 * @param string $string
+	 * @return string
+	 ************************/
 	public function obfuscate($string) {
+		// Init
 		$return = '';
+		
+		// Convert characters
 		for ($i=0; $i<strlen($string); $i++){
 			 $return .= "&#" . ord($string[$i]) . ";";
 		}
