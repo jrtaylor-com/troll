@@ -5,10 +5,13 @@
 
 	# Installation directory
 	#RewriteBase /
-
+	
+	# forbidden
+	RewriteRule ^[_\.]/? - [F,L]
+	
 	# Protect application and system files from being viewed
 	# This is only necessary when these files are inside the webserver document root
-	RewriteRule ^(app|config|sys) - [R=404,L]
+	RewriteRule ^(cache|app|config|sys) - [F,L]
 
 	# Allow any files or directories that exist to be displayed directly
 	RewriteCond %{REQUEST_FILENAME} !-f
@@ -19,4 +22,15 @@
 	#
 	# Alternativly, if the rewrite rule above does not work try this instead:
 	RewriteRule .* index.php?troll_uri=$0 [PT,QSA,L]
+</IfModule>
+
+# gzip compression.
+<IfModule mod_deflate.c>
+	# html, xml, css, and js:
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json 
+
+	# webfonts and svg:
+	<FilesMatch "\.(ttf|otf|eot|svg)$" >
+		SetOutputFilter DEFLATE
+	</FilesMatch>
 </IfModule>

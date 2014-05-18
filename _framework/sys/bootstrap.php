@@ -1,4 +1,4 @@
-<?php
+<?php defined('APPPATH') or die('No direct script access.');
 /**
  * TROLL process switch file, initiated by root index.php file.
  */
