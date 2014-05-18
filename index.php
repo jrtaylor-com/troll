@@ -10,13 +10,16 @@ error_reporting(E_ALL & ~E_NOTICE);
 // $application = '_framework/app';
 // $system      = '_framework/sys';
 
+// In dev?
+define('IS_DEV', strpos(__FILE__, 'trolldev') === 0);
+
 // TODO replace all window \\ with something that is cross platform
 define('APPPATH', dirname(__FILE__) . '/_framework/');
 define('BASEPATH', dirname(__FILE__));
 define('CACHEPATH', dirname(__FILE__) . '/cache/');
 
-// define install directory name to be stripped from route processing
-define('INSTALLEDIN', 'trolldev');
+// Define install directory name to be stripped from route processing
+define('INSTALLEDIN', (!IS_DEV) ? 'troll' : 'trolldev');
 
 include('./_framework/sys/core/Config.php');
 include('./_framework/sys/core/Cache.php');
@@ -24,7 +27,6 @@ include('./_framework/sys/core/Route.php');
 include('./_framework/sys/core/Request.php');
 include('./_framework/sys/core/View.php');
 include('./_framework/sys/core/Util.php');
-//include('testing.php');
 
 // TODO setup a method in Route that will convert hyphened names to camelcase
 Route::run();
