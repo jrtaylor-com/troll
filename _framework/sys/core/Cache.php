@@ -74,6 +74,6 @@ class Cache {
 	 * @return boolean
 	 ************************/
 	public function cleanKey($key) {
-		return str_replace(array('\\', '/', '&', '='), '-', $key);
+		return str_replace(array(' ', '"', '\'', '&', '/', '\\', '?', '#', '='), '-', $key);
 	}
 }

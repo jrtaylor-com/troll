@@ -20,7 +20,7 @@ class Request {
 		// Make sure we have the required params
 		foreach ((array)$config['methods'][$class]['required_parameters'] as $pk => $pv) {
 			if (!array_key_exists($pv, $params)) {
-				return $pv;
+				Route::badRequest();
 			}
 		}
 		
@@ -46,11 +46,19 @@ class Request {
 		// Execute
 		$result = curl_exec($ch);
 		if (curl_getinfo($ch, CURLINFO_HTTP_CODE) == 200) {
+			// Display error if bad request
+			$res = json_decode($result);
+			if (!empty($res->Status) and $res->Status->Status == 4) {
+				Route::badRequest();
+			}
+			
 			// Cache results
 			Cache::put($config['methods'][$class]['class_and_method'] . $params_string, $result);
 			
 			// Return
 			return json_decode($result, FALSE);
+		} else {
+			Route::badRequest();
 		}
 	}
 }

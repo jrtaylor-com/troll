@@ -71,4 +71,17 @@ class Route {
 		// Return current URI without installed directory in string
 		return self::$current_uri = rtrim(ltrim(str_replace(INSTALLEDIN, '', $_SERVER['REQUEST_URI']), "/ \t\n\r"), "/ \t\n\r");
 	}
+	
+	/*************************
+	 * Display 404
+	 * 
+	 * @param $view
+	 * @return string
+	 ************************/
+	public function badRequest($view = '404') { 
+		header("HTTP/1.0 404 Not Found");
+		View::assign('title', $title = 'Page not found - 404');
+		View::render($view);
+		exit;
+	}
 }

@@ -40,17 +40,17 @@ if (!empty(Route::$controller) and file_exists(APPPATH . 'app/controllers/' . uc
 	include(APPPATH . 'app/controllers/' . ucfirst(Route::$controller) . 'Controller.php');
 	// Check if class exists
 	if (class_exists(ucfirst(Route::$controller) . 'Controller')) {
-		$class = ucfirst(Route::$controller) . 'Controller';
+		$class = ucfirst(Route::$controller) . 'Controller'; 
 		$controller = new $class();
 		if (is_callable(array($controller, Route::$method))) {
 			$method = Route::$method;
 			$controller->$method(Route::$params);
 		} else {
-			echo 'Method does not exist';
+			Route::badRequest();
 		}
 	} else {
-		'Controller is not defined.';
+		Route::badRequest();
 	}
 } else {
-	echo 'Controller file missing.';
+	Route::badRequest();
 }
