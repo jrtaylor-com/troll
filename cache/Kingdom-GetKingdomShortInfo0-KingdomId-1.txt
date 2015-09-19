@@ -1,1 +1,0 @@
-{"Status":{"Status":0,"Error":"Success","Detail":null},"KingdomInfo":{"KingdomId":1,"KingdomName":"The Kingdom of the Wetlands","Abbreviation":"WL","HasHeraldry":1,"IsPrincipality":0,"ParentKingdomId":0,"Active":"Active"},"Code":0}
