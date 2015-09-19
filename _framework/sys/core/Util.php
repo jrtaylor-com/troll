@@ -7,7 +7,7 @@ class Util {
 	 * @param int $id
 	 * @return string
 	 ************************/
-	public function getKingdomNameById($id) {
+	public static function getKingdomNameById($id) {
 		// Check cache
 		if ($cached = Cache::get('KingdomNameList')) {
 			$kingdoms = $cached;
@@ -36,7 +36,7 @@ class Util {
 	 * @param string $string
 	 * @return string
 	 ************************/
-	public function obfuscate($string) {
+	public static function obfuscate($string) {
 		// Init
 		$return = '';
 		

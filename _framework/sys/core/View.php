@@ -43,8 +43,8 @@ class View {
 	 * @param string $value
 	 * @return void
 	 ************************/
-	public static function assign($key, & $value) {
-		self::$vars[$key] = & $value;
+	public static function assign($key, $value) {
+		self::$vars[$key] = $value;
 	}
 	
 	/*************************

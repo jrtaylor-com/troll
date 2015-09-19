@@ -8,7 +8,7 @@ class Request {
 	 * @param string $params - Parameters required by ORK request, either empty or with value but all are required for ORK response
 	 * @return array
 	 ************************/
-	public function get($class, $params = array()) {
+	public static function get($class, $params = array()) {
 		// Config settings
 		include(APPPATH . 'config/config.php');
 		

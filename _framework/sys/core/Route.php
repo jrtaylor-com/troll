@@ -27,14 +27,18 @@ class Route {
 	 * 
 	 * @return void
 	 ************************/
-	public function get() {
+	public static function get() {
 		// Set the uri
 		self::$current_uri = rtrim(ltrim(str_replace(INSTALLEDIN, '', $_SERVER['REQUEST_URI']), "/ \t\n\r"), "/ \t\n\r");
 		$route_parts = explode('/', self::$current_uri);
 		
 		// Set controller
 		if (!empty($route_parts[0])) {
-			self::$controller = $route_parts[0];
+			if (!in_array($route_parts[0], Config::get('routes.controllers'))) {
+				self::$controller = 'home';
+			} else {
+				self::$controller = $route_parts[0];
+			}
 		} else {
 			// Default to index if there is none
 			self::$controller = 'home';
@@ -64,7 +68,7 @@ class Route {
 	 * 
 	 * @return string
 	 ************************/
-	public function run() {
+	public static function run() {
 		// Load everything
 		self::get();
 		
@@ -78,9 +82,9 @@ class Route {
 	 * @param $view
 	 * @return string
 	 ************************/
-	public function badRequest($view = '404') { 
+	public static function badRequest($view = '404') { 
 		header("HTTP/1.0 404 Not Found");
-		View::assign('title', $title = 'Page not found - 404');
+		View::assign('title', 'Page not found - 404');
 		View::render($view);
 		exit;
 	}

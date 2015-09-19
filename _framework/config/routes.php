@@ -1,5 +1,10 @@
 <?php defined('APPPATH') or die('No direct script access.');
 
-$config = array(
-	
-)
+$config = [
+	'controllers' => [
+		'home',
+		'kingdom',
+		'park',
+		'player'
+	]	
+];

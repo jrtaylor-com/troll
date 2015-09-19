@@ -23,7 +23,7 @@ class Cache {
 	 * @param string $key - Filename to be used for cache file excluding extension
 	 * @return array
 	 ************************/
-	public function get($key) {
+	public static function get($key) {
 		$file = Cache::$cache_path . Cache::cleanKey($key) . Cache::$cache_ext;
 		if (file_exists($file)) {
 			// Check if file is expired
@@ -50,7 +50,7 @@ class Cache {
 	 * @param string $value - should be json
 	 * @return boolean
 	 ************************/
-	public function put($key, $value) {
+	public static function put($key, $value) {
 		$file = Cache::$cache_path . Cache::cleanKey($key) . Cache::$cache_ext;
 		
 		// Delete file if it exists
@@ -73,7 +73,7 @@ class Cache {
 	 * @param string $key
 	 * @return boolean
 	 ************************/
-	public function cleanKey($key) {
+	public static function cleanKey($key) {
 		return str_replace(array(' ', '"', '\'', '&', '/', '\\', '?', '#', '='), '-', $key);
 	}
 }
